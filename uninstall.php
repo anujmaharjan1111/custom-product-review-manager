@@ -5,19 +5,18 @@
  * Script that runs when the plugin Custom Product Review Manager is uninstalled
  */
 
-defined( 'WP_UNINSTALL_PLUGIN' ) || exit; // exit if directly accessed the file.
+defined( 'WP_UNINSTALL_PLUGIN' ) || exit; // exit if the file is directly accessed.
 
 // only proceed if user have an authority to delete
 if ( ! current_user_can( 'delete_plugins' ) ) {
 	exit;
 }
 
-// Sanitize and validate
 global $wpdb;
 
 // Delete all 'product_review' posts permanently after plugin is uninstalled
 $cprm_product_review = get_posts( [
-	'post_type'   => 'cprm_product_review',
+	'post_type'   => 'product_review',
 	'numberposts' => - 1,
 	'post_status' => 'any',
 	'fields'      => 'ids',

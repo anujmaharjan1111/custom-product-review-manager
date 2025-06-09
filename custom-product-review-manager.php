@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) { //exit if the plugin file is accessed directly
 }
 
 add_action( 'plugins_loaded', function () {
-	if ( ! class_exists( 'WooCommerce' ) ) { //check if WooCommerce plugin is active
+	if ( ! class_exists( 'WooCommerce' ) ) { //check if WooCommerce plugin is active, since the WooCommerce plugin is required
 		add_action( 'admin_notices', function () {
 			echo '<div class="notice notice-error"><p><strong>Custom Product Review Manager: </strong>The WooCommerce is not active. Please install and activate WooCommerce to use this plugin.</p></div>';
 		} ); //display notice in admin dashboard if WooCommerce plugin is not active
@@ -27,10 +27,9 @@ add_action( 'plugins_loaded', function () {
 
 //define all plugin constants used with in plugin
 define( 'CPRM_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-
 define( 'CPRM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
-// Activation Hook - Create custom tables or roles if needed
+// Activation Hook
 function cprm_activate_plugin() {
 	// Run only on activation
 	error_log( 'Custom Product Review Manager plugin is activated' ); // just for testing purpose
@@ -39,7 +38,7 @@ function cprm_activate_plugin() {
 
 register_activation_hook( __FILE__, 'cprm_activate_plugin' );
 
-// Deactivation Hook - Cleanup schedules or temp options
+// Deactivation Hook
 function cprm_deactivate_plugin() {
 	// Run only on deactivation
 	error_log( 'Custom Product Review Manager plugin is deactivated' ); // just for testing purpose
@@ -49,6 +48,7 @@ function cprm_deactivate_plugin() {
 register_deactivation_hook( __FILE__, 'cprm_deactivate_plugin' );
 
 //Uninstall Hook - Remove all the plugin data (not needed since there is uninstall.php)
+
 if ( file_exists( CPRM_PLUGIN_PATH . 'includes/class-custom-product-review-manager.php' ) ) {
-	require_once CPRM_PLUGIN_PATH . 'includes/class-custom-product-review-manager.php';
+	require_once CPRM_PLUGIN_PATH . 'includes/class-custom-product-review-manager.php'; // include the main plugin class file exist
 }
