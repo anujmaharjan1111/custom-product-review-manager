@@ -1,0 +1,7 @@
+.cprm-review-details p label{
+    font-weight: 700;
+}
+.cprm-review-details p .cprm-review-field{
+    margin-top: 10px;
+ display: block;
+}
